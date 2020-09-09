@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  nextdb:
+    image: mariadb:10.5
+    volumes:
+      - /Data/Apps/NextCloud/Db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=Secr3t
+      - MYSQL_DATABASE=Nextcloud
+      - MYSQL_USER=Nextcloud
+      - MYSQL_PASSWORD=Secr3t
+
+  nextapp:
+    image: nextcloud
+    ports:
+      - 8085:80
+    depends_on:
+      - nextdb
+    volumes:
+      - /Data/Apps/NextCloud/App:/var/www/html

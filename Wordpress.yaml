@@ -1,0 +1,22 @@
+version: '3'
+services:
+
+  wordpress:
+    image: wordpress
+    ports:
+      - 8080:80
+    volumes:
+      - /Data/Apps/WordApp:/var/www/html
+    depends_on:
+      - worddb
+
+  worddb:
+    image: mariadb:10.5
+    volumes:
+      - /Data/Apps/WordDb:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=Wordpress
+      - MYSQL_USER=Wordpress
+      - MYSQL_PASSWORD=Secr3t
+      - MYSQL_ROOT_PASSWORD=Secr3t
+
